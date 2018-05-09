@@ -22,6 +22,18 @@ namespace WpfLab1
             Application.Current.MainWindow.Opacity = 0.5;
             vm.Login();
             Application.Current.MainWindow.Opacity = 1;
+            if(vm.loginContent=="Logout")
+            {
+                FirstColumn.MinWidth = 210;
+                FirstColumn.Width = new GridLength(4, GridUnitType.Star);
+            }
+            else
+            {
+                FirstColumn.MinWidth = 0;  
+                FirstColumn.Width = new GridLength(0, GridUnitType.Pixel);
+            }
+                
+          
         }
     }
 }

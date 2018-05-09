@@ -12,6 +12,7 @@ namespace WpfLab1.ViewModels
             loginContent = "Login";
             Emails = new BindingList<EmailMessage>();
             Email =null;
+            MailColumnSize = 0;
         }
         public EmailUser loggedUser;
         public BindingList<EmailMessage> Emails { get; set; }
@@ -37,6 +38,18 @@ namespace WpfLab1.ViewModels
                 OnPropertyChanged("loginContent");
             }
         }
+        int _mailColumnSize;
+        public int MailColumnSize
+        {
+            get { return _mailColumnSize; }
+            set
+            {
+                if (_mailColumnSize == value) return;
+                _mailColumnSize = value;
+                OnPropertyChanged("MailColumnSize");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -51,6 +64,7 @@ namespace WpfLab1.ViewModels
             if (Emails.Count != 0)
             {
                 loginContent = "Login";
+                MailColumnSize = 0;
                 Emails.Clear();
                 loggedUser = null;
                 return;
@@ -62,6 +76,7 @@ namespace WpfLab1.ViewModels
             {
                 Emails.Clear();
                 loginContent = "Logout";
+                MailColumnSize = 200;
                 foreach (var e in loggedUser.MessagesReceived)
                     Emails.Add(e);
             }
