@@ -6,17 +6,18 @@
              xmlns:local="clr-namespace:WpfLab1.Controlls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{Binding Email}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Button Grid.Row="0" Content="Hi"/>
-        <!--<Label Grid.Row="0" Content="{Binding Title}"/>-->
-        <Label Grid.Row="1" Content="{Binding Title}"/>
-        <Label Grid.Row="2" Content="{Binding Title}"/>
-        <Label Grid.Row="3" Content="{Binding Title}"/>
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid DataContext="{Binding Email}" ScrollViewer.CanContentScroll="True" Margin="10,10,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="{Binding Title}" FontSize="25"/>
+            <Label Grid.Row="1" Content="{Binding From}" FontSize="20"/>
+            <Label Grid.Row="2" Content="{Binding Date}"/>
+            <TextBlock Grid.Row="3"  TextWrapping="Wrap" TextAlignment="Justify" Text="{Binding Body}" />
+        </Grid>
+    </ScrollViewer>
 </UserControl>

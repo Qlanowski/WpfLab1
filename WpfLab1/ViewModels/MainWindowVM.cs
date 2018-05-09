@@ -27,7 +27,7 @@ namespace WpfLab1.ViewModels
             }
         }
 
-        private string _loginContent;
+        string _loginContent;
         public string loginContent
         {
             get {return _loginContent; }
