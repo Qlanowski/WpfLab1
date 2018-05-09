@@ -10,10 +10,22 @@ namespace WpfLab1.ViewModels
         public MainWindowVM()
         {
             loginContent = "Login";
-            emails = new BindingList<EmailMessage>();
+            Emails = new BindingList<EmailMessage>();
+            Email =null;
         }
         public EmailUser loggedUser;
-        public BindingList<EmailMessage> emails { get; set; }
+        public BindingList<EmailMessage> Emails { get; set; }
+
+        EmailMessage _email;
+        public EmailMessage Email {
+            get { return _email; }
+            set
+            {
+                if (_email == value) return;
+                _email = value;
+                OnPropertyChanged("Email");
+            }
+        }
 
         private string _loginContent;
         public string loginContent
@@ -36,10 +48,10 @@ namespace WpfLab1.ViewModels
 
         internal void Login()
         {
-            if (emails.Count != 0)
+            if (Emails.Count != 0)
             {
                 loginContent = "Login";
-                emails.Clear();
+                Emails.Clear();
                 loggedUser = null;
                 return;
             }
@@ -48,13 +60,13 @@ namespace WpfLab1.ViewModels
             loggedUser = win.loggedUser;
             if (wyn)
             {
-                emails.Clear();
+                Emails.Clear();
                 loginContent = "Logout";
                 foreach (var e in loggedUser.MessagesReceived)
-                    emails.Add(e);
+                    Emails.Add(e);
             }
             else
-                emails.Clear();
+                Emails.Clear();
         }
     }
 }
