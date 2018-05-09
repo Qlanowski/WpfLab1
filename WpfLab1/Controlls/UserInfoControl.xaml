@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="WpfLab1.Controlls.UserInfoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfLab1.Controlls"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="200">
+    <Grid Height="100">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="pack://application:,,,/Resources/avatar.png" Width="50" Height="50"/>
+        <StackPanel Grid.Column="1" DataContext="{Binding LoggedUser}" VerticalAlignment="Center">
+            <Label Content="{Binding Name}" FontWeight="Bold" FontSize="16"/>
+            <Label Content="{Binding LastName}" FontWeight="Bold" FontSize="16"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

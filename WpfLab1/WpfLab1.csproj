@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,12 +61,19 @@
     <Compile Include="Controlls\ShowMailControl.xaml.cs">
       <DependentUpon>ShowMailControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\UserInfoControl.xaml.cs">
+      <DependentUpon>UserInfoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\MainWindowVM.cs" />
     <Page Include="Controlls\ShowMailControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlls\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlls\UserInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\avatar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,10 +12,20 @@ namespace WpfLab1.ViewModels
             loginContent = "Login";
             Emails = new BindingList<EmailMessage>();
             Email =null;
-            MailColumnSize = 0;
         }
-        public EmailUser loggedUser;
         public BindingList<EmailMessage> Emails { get; set; }
+
+        EmailUser _loggedUser;
+        public EmailUser LoggedUser
+        {
+            get { return _loggedUser; }
+            set
+            {
+                if (_loggedUser == value) return;
+                _loggedUser = value;
+                OnPropertyChanged("LoggedUser");
+            }
+        }
 
         EmailMessage _email;
         public EmailMessage Email {
@@ -38,17 +48,6 @@ namespace WpfLab1.ViewModels
                 OnPropertyChanged("loginContent");
             }
         }
-        int _mailColumnSize;
-        public int MailColumnSize
-        {
-            get { return _mailColumnSize; }
-            set
-            {
-                if (_mailColumnSize == value) return;
-                _mailColumnSize = value;
-                OnPropertyChanged("MailColumnSize");
-            }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -64,20 +63,18 @@ namespace WpfLab1.ViewModels
             if (Emails.Count != 0)
             {
                 loginContent = "Login";
-                MailColumnSize = 0;
                 Emails.Clear();
-                loggedUser = null;
+                LoggedUser = null;
                 return;
             }
             var win = new LoginWindow();
             var wyn = win.ShowDialog().Value;
-            loggedUser = win.loggedUser;
+            LoggedUser = win.loggedUser;
             if (wyn)
             {
                 Emails.Clear();
                 loginContent = "Logout";
-                MailColumnSize = 200;
-                foreach (var e in loggedUser.MessagesReceived)
+                foreach (var e in LoggedUser.MessagesReceived)
                     Emails.Add(e);
             }
             else
