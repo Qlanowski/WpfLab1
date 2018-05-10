@@ -30,7 +30,20 @@
                 <RowDefinition Height="2"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Content="{Binding loginContent}"  Name="loginbtn" Width="70" Height="70" HorizontalAlignment="Left" Click="LoginBtn"/>
+            <StackPanel Orientation="Horizontal">
+                <Button  VerticalContentAlignment="Bottom" FontWeight="Bold" Background="White" Name="loginbtn" Width="70" Height="70" HorizontalAlignment="Left" Click="LoginBtn">
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/login.png" Width="50" Height="50"/>
+                        <TextBlock Text="{Binding loginContent}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button VerticalContentAlignment="Bottom"  Name="emailbtn" FontWeight="Bold" Background="White" Width="70" Margin="10,0,0,0" Height="70" HorizontalAlignment="Left" Click="NewMailBtn">
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/add.png" Width="50" Height="50"/>
+                        <TextBlock Text="New Email" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
             <Border Grid.Row="1" BorderBrush="#61738B" BorderThickness="2" />
             <controls:ShowMailControl Grid.Row="3"/>
         </Grid>

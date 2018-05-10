@@ -1,0 +1,40 @@
+﻿<Window x:Class="WpfLab1.SentMailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLab1"
+        mc:Ignorable="d"
+        Title="SentMailWindow" Height="400" Width="600" WindowStartupLocation="CenterScreen" WindowStyle="None" Visibility="Visible" ShowInTaskbar="False" AllowsTransparency="True">
+    <Grid DataContext="{Binding NewEmail}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="New Mail" FontSize="25" Margin="10,0,0,0" Foreground="DarkGreen" VerticalAlignment="Center"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="To:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+            <TextBox Text="{Binding To}" Height="20" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,30,0" />
+            
+            <Label Content="Title:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+            <TextBox  Text="{Binding Title}" Height="20" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,30,0"/>
+            
+            <Label Grid.Column="0" Grid.Row="2" Content="Message:"  HorizontalAlignment="Right" Margin="0,0,10,0"/>
+            <TextBox Text="{Binding Body}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10,30,10" TextWrapping="Wrap"/>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,30,0">
+            <Button Content="Cancel" Width="80" Height="20" Margin="0,0,50,0" Foreground="#FF216433" Click="CancelBtnClick"/>
+            <Button Name="OkBtn" Content="Ok" Width="80" Height="20" Foreground="#FF216433" Click="OkBtnClick"/>
+        </StackPanel>
+    </Grid>
+</Window>

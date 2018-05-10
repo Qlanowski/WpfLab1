@@ -32,8 +32,12 @@ namespace WpfLab1
                 FirstColumn.MinWidth = 0;  
                 FirstColumn.Width = new GridLength(0, GridUnitType.Pixel);
             }
-                
-          
+        }
+        private void NewMailBtn(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Opacity = 0.5;
+            vm.NewMail(this);
+            Application.Current.MainWindow.Opacity = 1;
         }
     }
 }

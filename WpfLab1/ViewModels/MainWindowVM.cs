@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using wpfTask1;
 
 namespace WpfLab1.ViewModels
@@ -11,9 +12,11 @@ namespace WpfLab1.ViewModels
         {
             loginContent = "Login";
             Emails = new BindingList<EmailMessage>();
+            SentEmails = new BindingList<EmailMessage>();
             Email =null;
         }
         public BindingList<EmailMessage> Emails { get; set; }
+        public BindingList<EmailMessage> SentEmails { get; set; }
 
         EmailUser _loggedUser;
         public EmailUser LoggedUser
@@ -49,6 +52,16 @@ namespace WpfLab1.ViewModels
             }
         }
 
+        internal void NewMail(Window owner)
+        {
+            var win = new SentMailWindow(owner);
+            var wyn = win.ShowDialog().Value;
+            if (wyn)
+            {
+                SentEmails.Add(win.NewEmail);
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -76,6 +89,8 @@ namespace WpfLab1.ViewModels
                 loginContent = "Logout";
                 foreach (var e in LoggedUser.MessagesReceived)
                     Emails.Add(e);
+                foreach (var e in LoggedUser.MessagesSent)
+                    SentEmails.Add(e);
             }
             else
                 Emails.Clear();

@@ -24,6 +24,7 @@
                     <TextBlock Grid.Column="1" Text="{Binding Date}" FontSize="14"/>
                 </Grid>
             </DataTemplate>
+            <!--Recieve-->
             <DataTemplate x:Key="SelectedTemplate">
                 <Grid Height="100" Margin="10,10,10,10">
                     <Grid.RowDefinitions>
@@ -51,8 +52,39 @@
                         <Setter Property="Background" Value="{StaticResource SelectedBackground}"/>
                     </Trigger>
                 </Style.Triggers>
+                
             </Style>
-            
+
+            <!--Sent-->
+            <DataTemplate x:Key="SentTemplate">
+                <Grid Height="100" Margin="10,10,10,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="16"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Date}" FontSize="16"/>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock Text="To: " FontSize="16" />
+                        <TextBlock Text="{Binding To}" FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+            <Style TargetType="{x:Type ListBoxItem}" x:Key="sentalternatingWithBinding">
+                <Setter Property="Background" 
+                     Value="{Binding RelativeSource={RelativeSource Self},
+                     Path=(ItemsControl.AlternationIndex),
+                     Converter={StaticResource BackgroundConverter}}"/>
+                <Setter Property="ContentTemplate" Value="{StaticResource ItemTemplate}" />
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="ContentTemplate" Value="{StaticResource SentTemplate}" />
+                        <Setter Property="Background" Value="{StaticResource SelectedBackground}"/>
+                    </Trigger>
+                </Style.Triggers>
+
+            </Style>
             <!--Tab Items-->
             <Style x:Key="TabItemText" TargetType="{x:Type TextBlock}">
                 <Style.Triggers>
@@ -103,10 +135,13 @@
         </Grid.Resources>
         <TabControl Margin="10,10,10,10" BorderThickness="0">
             <TabItem Header="Received" Cursor="Hand">
-                <ListBox Name="listbox" BorderThickness="0" AlternationCount="2" ItemsSource="{Binding Path=Emails}" SelectedItem="{Binding Path=Email, Mode=OneWayToSource}" ItemContainerStyle="{StaticResource alternatingWithBinding}" Cursor="Arrow">
+                <ListBox BorderThickness="0" AlternationCount="2" ItemsSource="{Binding Path=Emails}" SelectedItem="{Binding Path=Email, Mode=OneWayToSource}" ItemContainerStyle="{StaticResource alternatingWithBinding}" Cursor="Arrow">
                 </ListBox>
             </TabItem>
-            <TabItem Header="Sent" Cursor="Hand" />
+            <TabItem Header="Sent" Cursor="Hand">
+                <ListBox BorderThickness="0" AlternationCount="2" ItemsSource="{Binding Path=SentEmails}" SelectedItem="{Binding Path=Email, Mode=OneWayToSource}" ItemContainerStyle="{StaticResource sentalternatingWithBinding}" Cursor="Arrow">
+                </ListBox>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>
