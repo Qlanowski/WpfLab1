@@ -13,10 +13,14 @@ namespace WpfLab1.ViewModels
             loginContent = "Login";
             Emails = new BindingList<EmailMessage>();
             SentEmails = new BindingList<EmailMessage>();
+            rEmails = new BindingList<EmailMessage>();
+            sEmails = new BindingList<EmailMessage>();
             Email =null;
         }
         public BindingList<EmailMessage> Emails { get; set; }
+        BindingList<EmailMessage> rEmails;
         public BindingList<EmailMessage> SentEmails { get; set; }
+        BindingList<EmailMessage> sEmails;
 
         EmailUser _loggedUser;
         public EmailUser LoggedUser
@@ -52,16 +56,59 @@ namespace WpfLab1.ViewModels
             }
         }
 
-        internal void NewMail(Window owner)
+        string _searchtxt;
+        public string Searchtxt
         {
-            var win = new SentMailWindow(owner);
-            var wyn = win.ShowDialog().Value;
-            if (wyn)
+            get { return _searchtxt; }
+            set
             {
-                SentEmails.Add(win.NewEmail);
+                if (_searchtxt == value) return;
+                _searchtxt = value;
+                OnPropertyChanged("Searchtxt");
             }
         }
-
+        public void UpdateList(bool recieve)
+        {
+            if(recieve)
+            {
+                Emails.Clear();
+                if (Searchtxt.Length==0)
+                {
+                    foreach (var e in rEmails)
+                        Emails.Add(e);
+                    Email = Emails[0];
+                    return;
+                }
+                var arr = Searchtxt.Split(' ');
+                foreach (var w in arr)
+                    foreach (var e in rEmails)
+                    {
+                        if (e.Title.Contains(w) || e.Date.ToString().Contains(w) || e.From.Contains(w))
+                            Emails.Add(e);
+                    }
+                Email = Emails[0];
+            }
+            else
+            {
+                SentEmails.Clear();
+                if (Searchtxt.Length == 0)
+                {
+                    foreach (var e in sEmails)
+                        SentEmails.Add(e);
+                    Email = SentEmails[0];
+                    return;
+                }
+                var arr = Searchtxt.Split(' ');
+                foreach (var w in arr)
+                    foreach (var e in sEmails)
+                    {
+                        if (e.Title.Contains(w) || e.Date.ToString().Contains(w) || e.To.Contains(w))
+                            SentEmails.Add(e);
+                    }
+                Email = SentEmails[0];
+            }
+            return;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -71,7 +118,19 @@ namespace WpfLab1.ViewModels
             }
         }
 
-        internal void Login()
+        internal void NewMail(Window owner)
+        {
+            var win = new SentMailWindow(owner);
+            var wyn = win.ShowDialog().Value;
+            var e = win.NewEmail;
+            if (wyn)
+            {
+                SentEmails.Add(e);
+                sEmails.Add(e);
+            }
+        }
+
+        internal void Login(Window owner)
         {
             if (Emails.Count != 0)
             {
@@ -80,7 +139,7 @@ namespace WpfLab1.ViewModels
                 LoggedUser = null;
                 return;
             }
-            var win = new LoginWindow();
+            var win = new LoginWindow(owner);
             var wyn = win.ShowDialog().Value;
             LoggedUser = win.loggedUser;
             if (wyn)
@@ -89,8 +148,12 @@ namespace WpfLab1.ViewModels
                 loginContent = "Logout";
                 foreach (var e in LoggedUser.MessagesReceived)
                     Emails.Add(e);
+                foreach (var e in LoggedUser.MessagesReceived)
+                    rEmails.Add(e);
                 foreach (var e in LoggedUser.MessagesSent)
                     SentEmails.Add(e);
+                foreach (var e in LoggedUser.MessagesSent)
+                    sEmails.Add(e);
             }
             else
                 Emails.Clear();

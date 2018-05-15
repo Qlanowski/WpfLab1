@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLab1"
         mc:Ignorable="d"
-        Title="SentMailWindow" Height="400" Width="600" WindowStartupLocation="CenterScreen" WindowStyle="None" Visibility="Visible" ShowInTaskbar="False" AllowsTransparency="True">
-    <Grid DataContext="{Binding NewEmail}">
+        Title="SentMailWindow" Height="400" Width="600" WindowStartupLocation="CenterOwner" WindowStyle="None" Visibility="Visible" ShowInTaskbar="False" AllowsTransparency="True">
+    <Grid DataContext="{Binding NewEmail, Mode=TwoWay}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
@@ -24,13 +24,13 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Content="To:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
-            <TextBox Text="{Binding To}" Height="20" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,30,0" />
+            <TextBox Name="Totxt" Text="{Binding To,Mode=TwoWay}" Height="20" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,30,0" />
             
             <Label Content="Title:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
-            <TextBox  Text="{Binding Title}" Height="20" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,30,0"/>
+            <TextBox Name="Titletxt" Text="{Binding Title,Mode=TwoWay}" Height="20" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,30,0"/>
             
             <Label Grid.Column="0" Grid.Row="2" Content="Message:"  HorizontalAlignment="Right" Margin="0,0,10,0"/>
-            <TextBox Text="{Binding Body}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10,30,10" TextWrapping="Wrap"/>
+            <TextBox Name="Bodytxt" Text="{Binding Body,Mode=TwoWay}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10,30,10" TextWrapping="Wrap"/>
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,30,0">
             <Button Content="Cancel" Width="80" Height="20" Margin="0,0,50,0" Foreground="#FF216433" Click="CancelBtnClick"/>

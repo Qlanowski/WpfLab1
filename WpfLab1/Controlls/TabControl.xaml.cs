@@ -23,6 +23,20 @@ namespace WpfLab1.Controlls
         public TabControl()
         {
             InitializeComponent();
+            RecieveSelected = true;
+            //RecTab.MouseLeftButtonDown+=(s,e)=> RecieveSelected = true;
+            //SenTab.MouseLeftButtonDown += (s, e) => RecieveSelected = false;
+            Tabctrl.MouseMove += (s, e) => RecieveSelected = RecTab.IsSelected;
         }
+        public bool RecieveSelected { get; set; }
+
+        //private void RecieveTrue(object sender, MouseButtonEventArgs e)
+        //{
+        //    RecieveSelected = true;
+        //}
+        //private void RecieveFalse(object sender, MouseButtonEventArgs e)
+        //{
+        //    RecieveSelected = false;
+        //}
     }
 }

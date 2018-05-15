@@ -21,8 +21,9 @@ namespace WpfLab1
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow()
+        public LoginWindow(Window owner)
         {
+            Owner = owner;
             InitializeComponent();
         }
         public EmailUser loggedUser;

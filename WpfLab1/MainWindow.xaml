@@ -20,7 +20,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <controls:UserInfoControl Grid.Row="0"/>
-            <controls:TabControl Grid.Row="1"/>
+            <controls:TabControl x:Name="TabCtrl" Grid.Row="1"/>
         </Grid>
                 
         <Border Grid.Column="1" BorderBrush="#61738B" BorderThickness="2" />
@@ -30,20 +30,43 @@
                 <RowDefinition Height="2"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal">
-                <Button  VerticalContentAlignment="Bottom" FontWeight="Bold" Background="White" Name="loginbtn" Width="70" Height="70" HorizontalAlignment="Left" Click="LoginBtn">
-                    <StackPanel>
-                        <Image Source="pack://application:,,,/Resources/login.png" Width="50" Height="50"/>
-                        <TextBlock Text="{Binding loginContent}" HorizontalAlignment="Center"/>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <Button  VerticalContentAlignment="Bottom" FontWeight="Bold" Background="White" Name="loginbtn" Width="70" Height="70" HorizontalAlignment="Left" Click="LoginBtn">
+                        <StackPanel>
+                            <Image Source="pack://application:,,,/Resources/login.png" Width="50" Height="50"/>
+                            <TextBlock Text="{Binding loginContent}" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button VerticalContentAlignment="Bottom"  Name="emailbtn" FontWeight="Bold" Background="White" Width="70" Margin="10,0,0,0" Height="70" HorizontalAlignment="Left" Click="NewMailBtn">
+                        <StackPanel>
+                            <Image Source="pack://application:,,,/Resources/add.png" Width="50" Height="50"/>
+                            <TextBlock Text="New Email" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <Border BorderBrush="Black"
+                    BorderThickness="2"
+                    VerticalAlignment="Center"
+                    Grid.Column="1"
+                    Margin="10,0,10,0"
+                        >
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Resources/search.png" Height="18"/>
+                        <TextBox Text="{Binding Searchtxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" TextChanged="Searching" Width="400"/>
                     </StackPanel>
-                </Button>
-                <Button VerticalContentAlignment="Bottom"  Name="emailbtn" FontWeight="Bold" Background="White" Width="70" Margin="10,0,0,0" Height="70" HorizontalAlignment="Left" Click="NewMailBtn">
-                    <StackPanel>
-                        <Image Source="pack://application:,,,/Resources/add.png" Width="50" Height="50"/>
-                        <TextBlock Text="New Email" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
+                </Border>
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <RadioButton Content="Polish" IsChecked="True"/>
+                    <RadioButton Content="English" />
+                </StackPanel>
+            </Grid>
+                    
             <Border Grid.Row="1" BorderBrush="#61738B" BorderThickness="2" />
             <controls:ShowMailControl Grid.Row="3"/>
         </Grid>

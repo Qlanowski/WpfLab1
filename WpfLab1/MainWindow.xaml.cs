@@ -17,10 +17,11 @@ namespace WpfLab1
             this.DataContext = vm;
         }
         private MainWindowVM vm;
+
         private void LoginBtn(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Opacity = 0.5;
-            vm.Login();
+            vm.Login(this);
             Application.Current.MainWindow.Opacity = 1;
             if(vm.loginContent=="Logout")
             {
@@ -31,6 +32,7 @@ namespace WpfLab1
             {
                 FirstColumn.MinWidth = 0;  
                 FirstColumn.Width = new GridLength(0, GridUnitType.Pixel);
+
             }
         }
         private void NewMailBtn(object sender, RoutedEventArgs e)
@@ -39,5 +41,12 @@ namespace WpfLab1
             vm.NewMail(this);
             Application.Current.MainWindow.Opacity = 1;
         }
+
+        private void Searching(object sender, RoutedEventArgs e)
+        {
+            if (vm!=null)
+              vm.UpdateList(TabCtrl.RecieveSelected);
+        }
+
     }
 }

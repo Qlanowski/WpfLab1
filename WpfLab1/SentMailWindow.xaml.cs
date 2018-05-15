@@ -17,7 +17,7 @@ namespace WpfLab1
             InitializeComponent();
             Height = Owner.Height * 0.8;
             Width = Owner.Width * 0.8;
-            OkBtn.IsEnabled = false;
+            NewEmail = new EmailMessage();
         }
         EmailMessage _newEmail;
         public EmailMessage NewEmail
@@ -35,29 +35,7 @@ namespace WpfLab1
         {
             if (PropertyChanged != null&&propertyName=="NewEmail")
             {
-                bool ok = CheckValidationOfEmail();
-                if (ok)
-                    OkBtn.IsEnabled = true;
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        private bool CheckValidationOfEmail()
-        {
-            try
-            {
-                MailAddress m = new MailAddress(NewEmail.To);
-                if (NewEmail.Title == "")
-                    return false;
-                if (NewEmail.Title.Trim(' ').Length==0)
-                    return false;
-                if (NewEmail.Body.Length>10&&NewEmail.Body.Trim(' ').Length>0)
-                    return true;
-                return false;
-            }
-            catch (FormatException)
-            {
-                return false;
             }
         }
 
@@ -71,6 +49,10 @@ namespace WpfLab1
         private void OkBtnClick(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
+            NewEmail.Body = Bodytxt.Text;
+            NewEmail.Date = DateTime.Now.ToString().Split(' ')[0];
+            NewEmail.Title = Titletxt.Text;
+            NewEmail.To = Totxt.Text;
             this.Close();
         }
     }
