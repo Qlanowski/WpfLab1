@@ -15,6 +15,7 @@ namespace WpfLab1
             InitializeComponent();
             vm = new MainWindowVM();
             this.DataContext = vm;
+            emailbtn.IsEnabled = false;
         }
         private MainWindowVM vm;
 
@@ -27,12 +28,13 @@ namespace WpfLab1
             {
                 FirstColumn.MinWidth = 210;
                 FirstColumn.Width = new GridLength(4, GridUnitType.Star);
+                emailbtn.IsEnabled = true;
             }
             else
             {
                 FirstColumn.MinWidth = 0;  
                 FirstColumn.Width = new GridLength(0, GridUnitType.Pixel);
-
+                emailbtn.IsEnabled = false;
             }
         }
         private void NewMailBtn(object sender, RoutedEventArgs e)

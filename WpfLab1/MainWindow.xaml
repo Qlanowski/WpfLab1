@@ -7,6 +7,7 @@
         xmlns:controls="clr-namespace:WpfLab1.Controlls"
         mc:Ignorable="d"
         Title="Mail Manager"  Height="600" Width="800" MinWidth="800" MinHeight="400" WindowStartupLocation="CenterScreen">
+
     <Grid Name="MainGrid" Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Name="FirstColumn" Width="0"/>
